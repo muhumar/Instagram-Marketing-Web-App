@@ -1,0 +1,173 @@
+
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+<title>Instagram Marketing | CRM Dashboard</title>
+
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'css/style2.css' %}" rel="stylesheet" type="text/css" media="all" />
+
+    <!-- js -->
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+    <!-- //js -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <link href="{% static 'css/fabochart.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/employee.css' %}" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" href="{% static 'images/icon.ico' %}" sizes="64x64" >
+
+
+</head>
+
+<body>
+	<div class="smart-main">
+
+<!-- navigation -->
+    <div class="navigation">
+                <a href="{% url 'marketing:marketing_profile' %}">
+
+			<div class="logo logo2">
+
+			</div>
+                </a>
+				 <!--<h2 class="dheading"><a href="{% url 'marketing:marketing_profile' %}">YOUR DASHBOARD</a></h2>-->
+
+			<!--&lt;!&ndash;//navbar-collapse&ndash;&gt;-->
+
+            <!--<div class="social-icons-men">-->
+
+				<!--<div class="men">-->
+					<!--<div id="dd" class="wrapper-dropdown-2" tabindex="1"><span><a href="#" class="men1"></a></span>-->
+							<!--<ul class="dropdown">-->
+
+
+									<!--<li><a href="{% url  'crm:view_profile' %}">View Profile </a></li>-->
+                                    <!--<li><a href="{% url  'marketing:view_subscription' %}">View Subscriptions </a></li>-->
+                                    <!--<li><a href="{% url  'marketing:add_account' %}">Add Account </a></li>-->
+
+									<!--<li><a href="{% url  'crm:logout' %}">Log Out</a></li>-->
+							<!--</ul>-->
+					<!--</div>-->
+					<!--<script type="text/javascript">-->
+							<!--function DropDown(el) {-->
+								<!--this.dd = el;-->
+								<!--this.initEvents();-->
+							<!--}-->
+							<!--DropDown.prototype = {-->
+								<!--initEvents : function() {-->
+									<!--var obj = this;-->
+
+									<!--obj.dd.on('click', function(event){-->
+										<!--$(this).toggleClass('active');-->
+										<!--event.stopPropagation();-->
+									<!--});-->
+								<!--}-->
+							<!--}-->
+							<!--$(function() {-->
+
+								<!--var dd = new DropDown( $('#dd') );-->
+
+								<!--$(document).click(function() {-->
+									<!--// all dropdowns-->
+									<!--$('.wrapper-dropdown-2').removeClass('active');-->
+								<!--});-->
+
+                            <!--});-->
+			         <!--</script>-->
+                            <!--</div>-->
+				<!--<div class="clearfix"> </div>-->
+			<!--</div>-->
+			<div class="clearfix"> </div>
+		</div>
+<!-- //navigation -->
+
+<!-- Add Ig Account -->
+     <div class="support">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-7  register contact " style="padding-top:2%;">
+                        {% if messages %}
+                            <div class="alert alert-success messages col-lg-10" style="margin-left:8%;width:85%;">
+                            {% for message in messages %}
+
+                                <span {% if message.tag %} class="{{ message.tags }}"{% endif %} style="font-family: 'Roboto';font-size:14px;">
+                                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important:{% endif %}
+                                {{ message }}<br/>
+                                </span>
+
+                            {% endfor %}
+                            </div><div class="clearfix"></div>
+                        {% endif %}
+                        <h2 style="font-size:1.7em;text-transform:none;margin-bottom:7px;">Lets get started!</h2>
+					    <p>Fill out the form below:</p>
+
+                        <form action="{% url 'marketing:add_account' %}" method="post">{% csrf_token %}
+                            <label class="iglabel">What is your Instagram username?</label>
+
+                            <div class="col-md-12 col-sm-6 contact_right_grid">
+                                <input type="text" name="username" class="inclass" style="color:#212121;text-align:left;">
+                            </div>
+                            <div class="clearfix"> </div>
+                            <label class="iglabel">What is your Instagram password?</label>
+                            <button type="button" class="pass2 fa fa-info-circle" data-tippy="We require your password in order to access your account via the API and perform the necessary actions which make your account grow. Your password is stored safely and will not be shared with any 3rd parties. We will not perform any unauthorized actions on your account such as changing and account information or contacting users without your permission."></button>
+                            <div class="col-md-12 col-sm-6 contact_right_grid">
+                                <input type="password" name="password" class="inclass" style="color:#212121;text-align:left;">
+                            </div>
+                            <div class="clearfix"> </div>
+                            <label class="iglabel">Who would you like to target?</label>
+                            <button type="button" class="pass fa fa-info-circle" data-tippy="Do you have any competitors on Instagram? Do you want to target specific hashtags or locations? Enter it all here!"></button>
+
+
+                            <div class="col-md-12 col-sm-6 contact_right_grid">
+                                <input type="text" name="targeting" class="inclass" style="color:#212121;text-align:left;">
+                            </div>
+                            <div class="clearfix"> </div>
+
+                            <input class="inreg addaccbtn" type="submit" value="SUBMIT">
+                        </form>
+
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+<!-- Add Ig Account -->
+     <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin:4px;"><span aria-hidden="true">&times;</span></button>
+                    <h2 style="text-align:center;margin-top:3%;color:firebrick;margin-left:8%" ><i class="fa fa-exclamation-circle" aria-hidden="true"></i></h2><hr style="margin:2px;">
+                    <h5 class="modal-title" id="myModalLabel" style="font-family: 'Roboto';">Make sure your Instagram account password is correct. An incorrect password will delay the marketing.</h5>
+                    <input type="hidden" value="" id="checkboxobj">
+                </div>
+            </div>
+        </div>
+
+    <script src="https://unpkg.com/popper.js@1/dist/umd/popper.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@4"></script>
+</div>
+
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script>
+    $(window).on('load',function(){
+        $('#mi-modal').modal('show');
+    });
+</script>
+
+</body>
+</html>

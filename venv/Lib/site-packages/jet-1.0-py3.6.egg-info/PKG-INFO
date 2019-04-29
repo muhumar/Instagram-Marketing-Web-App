@@ -1,0 +1,16 @@
+Metadata-Version: 1.1
+Name: jet
+Version: 1.0
+Summary: A simple to use, yet powerful version control system
+Home-page: https://github.com/entangly/jet/
+Author: Connor Swain
+Author-email: connor@bradingsoftware.co.uk
+License: MIT
+Description: See www.jetvc.co.uk
+Keywords: version control jet
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Software Development :: Version Control
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7

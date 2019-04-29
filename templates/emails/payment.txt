@@ -1,0 +1,11 @@
+<p>Hi {{name}},</p>
+
+<p>Thank you so much for placing an order with uptoSocial! We are glad to have you on board and will start setting up the marketing right away.</p>
+
+<p>In order for us to be able to start the marketing, please login to your Instagram account. Then you will see a popup asking if you just tried to access your account. Please select "yes, it was me" and then we should be good to go!</p>
+
+<p>Thank you again for choosing uptoSocial!</p>
+
+<p>Kind regards,</p>
+
+<p>Emil Faschang</p>

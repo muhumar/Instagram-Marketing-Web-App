@@ -1,0 +1,498 @@
+
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+<title>Instagram Marketing | CRM Dashboard</title>
+
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'css/style2.css' %}" rel="stylesheet" type="text/css" media="all" />
+
+    <!-- js -->
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+    <!-- //js -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <link href="{% static 'css/fabochart.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/employee.css' %}" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" href="{% static 'images/icon.ico' %}" sizes="64x64" >
+
+
+</head>
+
+	<div class="smart-main">
+
+<!--navigation -->
+    <div class="navigation">
+        <a href="{% url 'marketing:marketing_profile' %}">
+			<div class="logo">
+
+			</div>
+			        <!--<h2 class="dheading"><a href="{% url 'marketing:marketing_profile' %}">YOUR DASHBOARD</a></h2>-->
+        </a>
+			<!--//navbar-collapse-->
+
+            <div class="social-icons-men">
+
+				<div class="men">
+					<div id="dd" class="wrapper-dropdown-2" tabindex="1"><span><a href="#" class="men1"><i class="fa fa-user" aria-hidden="true"></i></a></span>
+							<ul class="dropdown">
+
+									<li><a href="{% url  'crm:view_profile' %}">View Profile </a></li>
+                                    <li><a href="{% url  'marketing:view_subscription' %}">View Subscriptions </a></li>
+                                    <li><a href="{% url  'marketing:add_account' %}">Add Account </a></li>
+
+									<li><a href="{% url  'crm:logout' %}">Log Out</a></li>
+							</ul>
+					</div>
+					<script type="text/javascript">
+							function DropDown(el) {
+								this.dd = el;
+								this.initEvents();
+							}
+							DropDown.prototype = {
+								initEvents : function() {
+									var obj = this;
+
+									obj.dd.on('click', function(event){
+										$(this).toggleClass('active');
+										event.stopPropagation();
+									});
+								}
+							}
+							$(function() {
+
+								var dd = new DropDown( $('#dd') );
+
+								$(document).click(function() {
+									// all dropdowns
+									$('.wrapper-dropdown-2').removeClass('active');
+								});
+
+                            });
+			         </script>
+                            </div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+<!-- //navigation -->
+
+<!-- List of Registered IG Accounts -->
+    <div class="" style="margin:20px auto;"></div>
+    <div class="userlist">
+	    <div class="container">
+        {% if messages %}
+            <div class="alert alert-success messages" style="display:none;">
+            {% for message in messages %}
+                <span {% if message.tag %} class="{{ message.tags }}"{% endif %}>
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important:{% endif %}
+                {{ message }}<br/>
+                </span>
+            {% endfor %}
+            </div>
+        {% endif %}
+                <div class="agile-blog-grids">
+                    <div class="row">
+
+                        <div class="col-lg-11">
+                            <div class="list-group" id="list1">
+                                <a href="#" class="list-group-item active" id="backcolor">Usernames
+                                <span class="pull-right edate"><p>Next Payment</p> <p style="text-align:center;">Date</p></span>
+                                <span class="pull-right rdate"><p>Registration</p> <p style="text-align:center;">Date</p></span></a>
+
+                                {% if marketing_profiles %}
+                                    {% for instance in marketing_profiles %}
+                                    <a href="{% url 'marketing:detail' pk=instance.pk  %}" class="list-group-item record">
+                                        <div class="fixlist" style="display:inline-block;">{{ instance.profile_username }}</div>
+                                    <span class="pull-right edate2" style="margin-right:0">{{ instance.expiry_date|date:'d-m-Y' }}</span>
+                                    <span class="pull-right rdate2">{{ instance.registration_date|date:'d-m-Y' }}</span>
+                                    </a>
+                                    {% endfor %}
+                                {% else %}
+                                    <a href="#" class="list-group-item record">No profile added.
+                                </a>
+                                {% endif %}
+                            </div>
+
+                            <a href="{{growth_dashboard_url}}" target="_blank"><input class="grdb" type="submit" value="Growth Dashboard"></a>
+                            <div class="clearfix"> </div>
+                            <br><div class="clearfix"> </div>
+                            <div class="heading-border" style="margin-bottom:17px" ></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+<!-- List of Registered IG Accounts -->
+
+<!-- Addons -->
+	<div class="calender-show-more">
+		<div class="calender-show-more-left" style="border:none;">
+			<div class="calender-lft">
+				<div class="calender-left1 left2">
+					<h1 style="font-family: 'Roboto';" class="faqh">ADDONS</h1>
+				</div>
+                <div class="clearfix"></div>
+            </div>
+			<div class="calendar-bottom">
+
+				<div class="load_more">
+				    <div class="faqs" style="width:92.4%;padding-left:8.7%;">
+                        {% if qs2 %}
+                            {% for instance in qs2 %}
+                                {% if forloop.last %}
+                                    <ul class="menu" style="border-bottom:1px solid #212121">
+                                      <li class="item1"><a href="#">{{ instance.name }}<span class="pull-right addon">{{ instance.price }}$/month</span><i class="menu-down"><img src="images/down.png" alt="" /></i> </a>
+                                         <ul class="cute">
+                                            <li class="subitem1"><a href="#">{{ instance.description }}</a></li>
+                                             <a data-toggle="modal" data-target="#addBookDialog" data-name="{{ instance.name }}" data-id="{{ instance.id }}" data-price="{{ instance.price }}"  title="Add this item" class="open-AddBookDialog btn btn-primary mod" href="#addBookDialog">Buy</a>
+                                         </ul>
+                                      </li>
+                                    </ul>
+                                {% else %}
+                                    <ul class="menu">
+                                      <li class="item1"><a href="#">{{ instance.name }}<span class="pull-right addon">{{ instance.price }}$/month</span><i class="menu-down"><img src="images/down.png" alt="" /></i> </a>
+                                         <ul class="cute">
+                                            <li class="subitem1"><a href="#">{{ instance.description }}</a></li>
+                                             <a data-toggle="modal" data-target="#addBookDialog" data-name="{{ instance.name }}" data-id="{{ instance.id }}" data-price="{{ instance.price }}"  title="Add this item" class="open-AddBookDialog btn btn-primary mod" href="#addBookDialog">Buy</a>
+                                         </ul>
+                                      </li>
+                                    </ul>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+
+                          </div>
+
+				</div>
+
+			</div>
+		</div>
+
+		<div class="clearfix"> </div><br>
+        <div class="heading-border" style="margin-top:3% auto;"></div>
+    </div>
+<!-- //Addons -->
+
+
+<!-- FAQs -->
+    <div class="board">
+        <div class="calender-left1" style="margin-top:17px;padding-left:43px">
+					<h1 class="faqh" style="font-family: 'Roboto';">FAQ</h1>
+				</div><div class="clearfix"></div>
+        <div class="board-inner">
+                    <ul class="nav nav-tabs" id="myTab" style="border:none;">
+                    <div class="liner"></div>
+
+
+                  <li class="active"><a href="#popularqs" data-toggle="tab" title="Popular Questions" data-placement="bottom">
+                     <span class="round-tabs two">
+                         <h6 style="margin-top:20px;">Popular Questions</h6>
+                     </span>
+           </a>
+                 </li>
+                 <li><a href="#myq" data-toggle="tab" data-placement="bottom" title="Managing Your Account">
+                     <span class="round-tabs three" style="padding:2px;">
+                        <h6 style="margin-top:14px;">Managing your account</h6>
+                     </span> </a>
+                     </li>
+
+                     <li><a href="#billing" data-toggle="tab" data-placement="bottom" title="Billing">
+                         <span class="round-tabs four">
+                                <h5 style="margin-top:25px;">Billing</h5>
+                         </span>
+                     </a></li>
+
+
+                     </ul></div>
+            <div class="tab-content" style="padding-bottom:0px;margin-bottom:0px;">
+                    <div class="tab-pane fade in active" id="popularqs">
+
+                            <div class="faqs">
+                                <ul class="menu">
+                                  <li class="item1"><a href="#">When will i start seeing results?<i class="menu-down"><img src="images/down.png" alt="" /></i> </a>
+                                     <ul class="cute">
+                                        <li class="subitem1"><a href="#">Once you submitted all the required information your growth expert will start working on your account right away. Since you will experience organic growth it will take 12-24 hours for you to start seeing results.</a></li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                                <ul class="menu">
+                                  <li class="item1"><a href="#">Is your service safe to use?<i class="menu-down"><img src="images/down.png" alt="" /></i> </a>
+                                     <ul class="cute">
+                                        <li class="subitem1"><a href="#">Absolutely. Our marketing techniques deliver real growth to your account while working well within the constraints of Instagram. Our top priority is to keep your account safe and secure while using uptoSocial.</a></li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                                <ul class="menu" style="border-bottom:1px solid #212121">
+                                  <li class="item1"><a href="#">Are the followers i gain real?<i class="menu-down"><img src="images/down.png" alt="" /></i> </a>
+                                     <ul class="cute">
+                                        <li class="subitem1"><a href="#">We pride ourselves in helping you gain real followers and increasing your exposure. Unlike most of our competitors, we do not sell you fake followers. Every follower you gain decided to follow you because they enjoy your content. We make people see you, you make people follow you.</a></li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                          </div>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="myq">
+
+                          <div class="faqs">
+                                <ul class="menu">
+                                  <li class="item1"><a href="#">Do i get access to my own dashboard?<i class="menu-down"><img src="images/down.png" alt="" /></i> </a>
+                                     <ul class="cute">
+                                        <li class="subitem1"><a href="#">Yes, by using our service you receive your very own dashboard which shows detailed growth analytics for your account. This allows you to follow the performance of the marketing whenever you want.</a></li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                                <ul class="menu">
+                                  <li class="item1"><a href="#" class="srvc2">How can i request changes to my <span class="srvc">targeting?</span><i class="menu-down"><img src="images/down.png" alt="" /></i> </a>
+                                     <ul class="cute">
+                                        <li class="subitem1"><a href="#" >You can request changes to your targeting at any time by emailing your growth expert. He will take care of it within a couple of hours. We will add a ticketing system to our service soon which will then be located at www.uptosocial.co/support. From then on, all support requests can be submitted there.</a></li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                                <ul class="menu">
+                                  <li class="item1"><a href="#" class="srvc2">Can i use my account while using your <span class="srvc">services?</span><i class="menu-down"><img src="images/down.png" alt="" /></i> </a>
+                                     <ul class="cute">
+                                        <li class="subitem1"><a href="#">Of course. You can use your Instagram account just as you usually would.</a></li>
+                                    </ul>
+
+                                  </li>
+                                    </ul>
+                              <ul class="menu"  style="border-bottom:1px solid #212121">
+
+                                    <li class="item1"><a href="#" class="srvc2">Will i lose my new followers while using<span class="srvc"> your service?</span><i class="menu-down"><img src="images/down.png" alt="" /></i> </a>
+                                     <ul class="cute">
+                                        <li class="subitem1"><a href="#">Absolutely not. Since the followers you gain through uptoSocial are real users who actually enjoy your content they will not disappear after you discontinue our service.</a></li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                          </div>
+                      </div>
+
+                    <div class="tab-pane fade" id="billing">
+                          <div class="faqs">
+                                <ul class="menu">
+                                  <li class="item1"><a href="#">How do i cancel my subscription?<i class="menu-down"><img src="images/down.png" alt="" /></i> </a>
+                                     <ul class="cute">
+                                        <li class="subitem1"><a href="#">You can cancel your subscription at any time by emailing your growth expert with your request or doing it yourself within our websites dashboard or PayPal itself.</a></li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                                <ul class="menu">
+                                  <li class="item1"><a href="#">When will i be charged for the trial?<i class="menu-down"><img src="images/down.png" alt="" /></i> </a>
+                                     <ul class="cute">
+                                        <li class="subitem1"><a href="#">With our 14-day trial you will be charged $9,90 during the signup process. After the 14-day trial you either have the option to cancel the subscription or to continue with our service. You will be charged the full monthly fee of $49,99 automatically.
+                                        Don’t worry: If you forget to cancel before you are charged the full monthly fee you can contact our support within 3 days and request a full refund.</a></li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                                <ul class="menu">
+                                  <li class="item1"><a href="#">What payment methods do you accept?<i class="menu-down"><img src="images/down.png" alt="" /></i> </a>
+                                     <ul class="cute">
+                                        <li class="subitem1"><a href="#">We currently accept PayPal as our main payment method. If you don’t have a PayPal account you can pay using your credit card too.</a></li>
+                                    </ul>
+
+                                  </li>
+                                    </ul>
+                              <ul class="menu"  style="border-bottom:1px solid #212121">
+
+                                    <li class="item1"><a href="#">What is your refund policy?<i class="menu-down"><img src="images/down.png" alt="" /></i> </a>
+                                     <ul class="cute">
+                                        <li class="subitem1"><a href="#">We pride ourselves in not taking money without delivering results. If you do not gain followers through our marketing we will issue a full refund after the 30 day period. No questions asked. Details on our refund policy can be found at www.uptosocial.co/terms-and-conditions</a></li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                          </div>
+
+
+                      </div>
+
+
+                <div class="clearfix"></div><br>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+<!--initiate accordion-->
+    <script type="text/javascript">
+        $(function() {
+			    var menu_ul = $('.menu > li > ul'),
+			           menu_a  = $('.menu > li > a');
+			    menu_ul.hide();
+			    menu_a.click(function(e) {
+			        e.preventDefault();
+			        if(!$(this).hasClass('active')) {
+			            menu_a.removeClass('active');
+			            menu_ul.filter(':visible').slideUp('normal');
+			            $(this).addClass('active').next().stop(true,true).slideDown('normal');
+			        } else {
+			            $(this).removeClass('active');
+			            $(this).next().stop(true,true).slideUp('normal');
+			        }
+			    });
+
+			});
+    </script>
+<!--initiate accordion-->
+<!-- FAQs -->
+
+  <div class="heading-border hbsupport" style="margin-top:2%;"></div>
+
+
+<!-- SUPPORT -->
+    <div class="support">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7  register contact supportinp" style="padding-top:1.4%;">
+                        <div class="support-heading">
+                            <h2 style="letter-spacing:0.04em;">SUPPORT</h2>
+                            <p>Send us your queries & problems</p>
+                        </div>
+                        <form action="{% url 'marketing:send-complaints' %}" method="post">{% csrf_token %}
+                            <div class="col-md-12 col-sm-6 contact_right_grid">
+                                <input type="text" name="subject" placeholder="SUBJECT" required="" class="inclass" style="color:#212121;text-align:left;">
+                            </div>
+                            <div class="clearfix"> </div>
+                            <textarea name="message" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'MESSAGE...';}" required="">MESSAGE...</textarea>
+                            <input class="inreg" style="margin-left:6%" type="submit" value="SUBMIT">
+                        </form><br>
+                        <p style="margin-bottom:10px;margin-left:6.2%">Follow us for further details and offers</p>
+                        <div class="social">
+                            <a href="https://www.facebook.com/uptosocial.co/" target="_blank" class="fb"><i class="fa fa-facebook" style="font-size:20px"></i></a>
+                            <a href="https://www.instagram.com/uptosocial.co/" target="_blank" class="ig"><i class="fa fa-instagram" style="font-size:20px"></i></a>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+<!-- SUPPORT -->
+    </div>
+
+
+
+<div class="modal fade"  role="dialog"  data-backdrop='static' id="addBookDialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h4 class="modal-title" style="font-family: 'Roboto';">Select Account</h4>
+
+                <div class="modal-body mod">
+                 <form action="{% url 'add-on:paypal-addon' %}" method="POST">{% csrf_token %}
+
+                    <div class="form-group addinp">
+                    <label class="iglabel" style="margin-left:0px;">Addon Name:</label>
+                    <input class="form-control" style="font-family: 'Roboto';" type="text" name="add_name" id="bookName" value="" disabled/ >
+                    </div><br>
+
+                    <div class="form-group addinp">
+                    <label class="iglabel" style="margin-left:0px;">Addon Price:</label>
+                    <input class="form-control" style="font-family: 'Roboto';" type="text" name="price" id="bookPrice" value="" disabled/>
+                    </div><br>
+                     <input class="form-control" style="font-family: 'Roboto';"  name="id" id="bookId" value="" type="hidden"/>
+
+                    <div class="form-group">
+                      <label class="iglabel" style="margin-left:0px;" for="sel1">Accounts:</label>
+                      <select class="form-control" id="userid" name="checkboxes[]" style="font-family: 'Roboto';">
+                          {% if marketing_profiles %}
+                              {% for instance in marketing_profiles %}
+                                <option value="{{ instance.id }}" >{{ instance.profile_username }}</option>
+                              {% endfor %}
+                          {% endif %}
+                      </select>
+                    </div><br>
+                     <input class="inreg" type="submit" value="SUBMIT">
+
+                </form>
+                </div>
+            </div>
+        </div>
+     </div>
+
+</div>
+<div class="modal fade"  role="dialog"  data-backdrop='static' id="PaymentDone">
+    <div class="modal-dialog modal-md" >
+        <div class="modal-content">
+            <div class="modal-header" style="background:white">
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                <h1 class="modal-title"><img src="{% static 'images/img22.jpg' %}" width="30%;"></h1>
+
+                <div class="modal-body mod">
+                 <p style="font-family: 'Roboto';">Thank you for placing an order with uptoSocial! We are going to access your account shortly. To make sure everything goes smoothly, make sure to click "yes, it was me" when the popup, that asks if you have tried to access your account from a different device, appears. Important: Our servers are located in Romania but our company is based in Vienna, Austria.</p>
+                 <h1 class="modal-title" style="margin-left:2.5%"><img src="{% static 'images/noti.jpg' %}" width="30%;"></h1><br>
+                 <input class="inreg" type="submit" value="Got it!" style="margin-left:31%;font-family:'Roboto';" data-dismiss="modal">
+
+                </div>
+            </div>
+        </div>
+     </div>
+
+</div>
+
+<script src="{% static 'js/bootstrap.js' %}"></script>
+<script>
+    $(document).on("click", ".open-AddBookDialog", function () {
+     var myBookName = $(this).data('name');
+     var myBookPrice = $(this).data('price');
+     var myBookId = $(this).data('id');
+     myBookPrice+='$/month';
+
+     var name = $(".modal-body #bookName").val( myBookName );
+     var price = $(".modal-body #bookPrice").val( myBookPrice );
+     var id = $(".modal-body #bookId").val( myBookId );
+
+     //$('#addBookDialog').modal('show');
+});
+   $( ".inreg" ).click(function() {
+
+      var name = $(".modal-body #bookName").val();
+      var id = $(".modal-body #bookId").val();
+      var userid = $(".modal-body #userid").val();
+      var url = "{% url 'add-on:manage-addon' %}";
+      data = {
+          'id':id,
+          'checkbox':userid,
+          'name':name
+      };
+       $.ajax({
+           url:url,
+           method:'POST',
+           data:data,
+           success:function () {
+               console.log("Success.")
+           },
+           error:function () {
+               console.log("Error.")
+           }
+       });
+
+
+});
+</script>
+
+  {% if messages %}
+    <script>
+             $(window).on('load',function(){
+        $('#PaymentDone').modal('show');
+    });
+    </script>
+
+   {% endif %}
+
+</body>
+</html>

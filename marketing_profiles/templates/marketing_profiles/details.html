@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<title>Instagram Marketing | CRM Dashboard</title>
+
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+    
+    
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'css/style2.css' %}" rel="stylesheet" type="text/css" media="all" />
+
+    <!-- js -->
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+    <!-- //js -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    <link href="{% static 'css/fabochart.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/employee.css' %}" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" href="{% static 'images/icon.ico' %}" sizes="64x64" >
+
+    
+</head>
+	
+<body>
+	<div class="smart-main">
+        
+<!-- navigation -->
+    <div class="navigation">
+                <a href="{% url 'marketing:marketing_profile' %}">
+
+			<div class="logo logo2">
+
+			</div>
+                </a>
+        <!--<h2 class="dheading"><a href="{% url 'marketing:marketing_profile' %}">YOUR DASHBOARD</a></h2>-->
+			<!--//navbar-collapse-->
+
+            <div class="social-icons-men">
+
+
+				<div class="men">
+					<div id="dd" class="wrapper-dropdown-2" tabindex="1"><span><a href="#" class="men1"><i class="fa fa-user" aria-hidden="true"></i></a></span>
+							<ul class="dropdown">
+
+									<li><a href="{% url 'crm:view_profile' %}">View Profile </a></li>
+                                    <li><a href="{% url 'marketing:view_subscription' %}">View Subscriptions </a></li>
+                                    <li><a href="{% url 'marketing:add_account' %}">Add Account </a></li>
+
+									<li><a href="{% url 'crm:logout' %}">Log Out</a></li>
+							</ul>
+					</div>
+					<script type="text/javascript">
+							function DropDown(el) {
+								this.dd = el;
+								this.initEvents();
+							}
+							DropDown.prototype = {
+								initEvents : function() {
+									var obj = this;
+
+									obj.dd.on('click', function(event){
+										$(this).toggleClass('active');
+										event.stopPropagation();
+									});
+								}
+							}
+							$(function() {
+
+								var dd = new DropDown( $('#dd') );
+
+								$(document).click(function() {
+									// all dropdowns
+									$('.wrapper-dropdown-2').removeClass('active');
+								});
+
+                            });
+			         </script>
+                            </div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+<!-- //navigation -->
+
+<!-- View Profile -->
+    <div class="support">
+            <div class="container">    
+                <div class="row">
+                    <div class="col-lg-7  register contact " style="padding-top:2%">
+                        <h2 style="font-size:1.7em;text-transform:none;" >Account Info</h2>
+
+                        <form action="{% url 'marketing:marketing_pass_change' %}" method="post">{% csrf_token %}
+                            <input autocomplete="false" name="hidden" type="text" style="display:none;">
+                            <label class="iglabel">Username:</label>
+                            {% if instance %}
+                            {% for instance in instance %}
+                            <div class="col-md-12 col-sm-6 contact_right_grid">
+                            <input type="hidden" name="name" class="inclass" style="color:#212121;text-align:left;" value="{{ instance.profile_username }}">
+                                <input type="text" name="" class="inclass" style="color:#212121;text-align:left;" value="{{ instance.profile_username }}" disabled>
+                            </div>
+                            <div class="clearfix"> </div>
+                            
+                            
+                            <label class="iglabel">Change Password:</label>
+                            <div class="col-md-12 col-sm-6 contact_right_grid">                                
+                                <input type="password"  name="password" class="inclass" id="inpass" style="color:#212121;text-align:left;" value="{{ instance.profile_password }}">
+                            </div>
+                            <div class="clearfix"> </div>
+                            
+                            
+                            <div class="col-md-12 col-sm-6 contact_right_grid" style="font-family: 'Roboto';font-size:15px;">
+                                <span class="pull-left" style="margin-left:5.1%"><input type="checkbox" onclick="myFunction()"> Show Password</span>
+                            </div>
+                            <div class="clearfix"> </div>
+                            {% endfor %}
+                            {% endif %}
+                            <br>
+
+                            <input class="inreg" type="submit" value="SUBMIT">
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+<!-- View Profile -->
+
+    
+<!-- List of Addons -->
+    <div class="" style="margin:20px auto;"></div>    
+    <div class="userlist">
+	    <div class="container">
+                <div class="agile-blog-grids">
+                    <div class="row">
+
+                        <div class="col-lg-11 viewsubs">
+                            <div class="list-group" id="list1">
+                                <a href="#" class="list-group-item active" id="backcolor">Addons
+                                <span class="pull-right subsp"><p>Subscription</p></span>
+                                    <span class="pull-right edate3"><p>Next Payment</p> <p style="text-align:center;">Date</p></span>
+                                <span class="pull-right rdate3"><p>Registration</p> <p style="text-align:center;">Date</p></span></a>
+                                {% if add_ons %}
+                                {% for instance in add_ons %}
+                                <a href="#" class="list-group-item record">
+                                <div class="fixlist" style="display:inline-block;">{{ instance.add_on.name}}</div>
+                                <div class="demo5 pull-right" >
+                                 <div class="switch demo4">
+                                    <input type="checkbox" name="checkboxes" class="checkbox-div" value="{{ instance.pk }}">
+                                    <label><i></i></label>
+                                 </div>
+                               </div>
+                                <span class="pull-right edate4">{{ instance.expiry_date|date:'d-m-Y' }}</span>
+                                <span class="pull-right rdate4">{{ instance.registration_date|date:'d-m-Y' }}</span>
+                                </a>
+                                {% endfor %}
+                                    {% else %}
+                                    <a href="#" class="list-group-item record">No Add on added.
+                                </a>
+                            {% endif %}
+                            </div>
+
+
+                            <div class="clearfix"> </div>
+                            <br><div class="clearfix"> </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+<!-- List of Registered IG Accounts -->
+    </div><div class="clearfix"></div><br>
+    
+    
+    <script>
+        function myFunction() {
+          <!--var x = document.getElementById("inpass");-->
+          <!--if (x.type === "password") {-->
+            <!--x.type = "text";-->
+          <!--} else {-->
+            <!--x.type = "password";-->
+          <!--}-->
+          <!--$('#inpass').togglePassword();-->
+           var $pwd = $("#inpass");
+            if ($pwd.attr('type') === 'password') {
+                $pwd.attr('type', 'text');
+            } else {
+                $pwd.attr('type', 'password');
+            }
+        }
+    
+    </script>
+
+    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin:4px;"><span aria-hidden="true">&times;</span></button>
+                <h5 class="modal-title" id="myModalLabel" style="font-family: 'Roboto';">Are you sure you want to cancel the subscription?</h5>
+                 <input type="hidden" value="" id="checkboxobj">
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default btnmodal" id="modal-btn-si" >Yes</button>
+                <button type="button" class="btn btn-primary" id="modal-btn-no" >No</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+<script>
+    var modalConfirm = function(callback){
+
+  $("#modal-btn-si").on("click", function(){
+    callback(true);
+    $("#mi-modal").modal('hide');
+  });
+
+  $("#modal-btn-no").on("click", function(){
+    callback(false);
+    $("#mi-modal").modal('hide');
+  });
+};
+        modalConfirm(function(confirm){
+          if(confirm){
+                paypal();
+          }else{
+            id=$('#checkboxobj').val()
+
+            $('input[type="checkbox"]').each(function() {
+                if($(this).val()==id){
+                    $(this).prop('checked',false);
+                }
+
+
+          })
+        }});
+      $(document).ready(function(){
+        $('input[name="checkboxes"]').click(function(){
+            if($(this).prop("checked") == true){
+               var id=$(this).val();
+               $(".modal-content #checkboxobj").val(id);
+               $("#mi-modal").modal('show');
+            }
+            else if($(this).prop("checked") == false){
+                paypal();
+            }
+        });
+    });
+
+    function paypal(){
+        var CheckboxClass = $('.checkbox-div').val();
+        var myCheckboxes = new Array();
+        $("input:checked").each(function() {
+            myCheckboxes.push($(this).val());// changed this line
+});
+        url = "{% url 'add-on:manage-addon' %}";
+        data = {
+            'add_on_id':myCheckboxes
+        };
+
+            $.ajax({
+                method:'POST',
+                url:url,
+                data:data,
+                success:function (data) {
+                    console.log("Success");
+                },error:function (errorData) {
+                    console.log('Error');
+                }
+            })
+    }
+
+</script>
+
+<script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>

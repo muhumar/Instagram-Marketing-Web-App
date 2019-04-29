@@ -1,0 +1,24 @@
+<script>
+        $(".checkbox-div").click(function(){
+        var CheckboxClass = $('.checkbox-div').val();
+        var myCheckboxes = new Array();
+        $("input:checked").each(function() {
+            myCheckboxes.push($(this).val());// changed this line
+});
+        url = "{% url 'add-on:manage-addon' %}";
+        data = {
+            'add_on_id':myCheckboxes
+        };
+
+            $.ajax({
+                method:'POST',
+                url:url,
+                data:data,
+                success:function (data) {
+                    console.log("Success");
+                },error:function (errorData) {
+                    console.log('Error');
+                }
+            })
+        })
+    </script>

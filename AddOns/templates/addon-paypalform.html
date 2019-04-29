@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+<title>Instagram Marketing | CRM Dashboard</title>
+
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'css/style2.css' %}" rel="stylesheet" type="text/css" media="all" />
+
+    <!-- js -->
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+    <!-- //js -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+    <link href="{% static 'css/fabochart.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/employee.css' %}" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" href="{% static 'images/icon.ico' %}" sizes="64x64" >
+
+
+</head>
+
+<body>
+	<div class="smart-main">
+
+<!-- navigation -->
+    <div class="navigation">
+			<div class="logo">
+
+			</div>
+			<h2 class="dheading">YOUR DASHBOARD</h2>
+			<!--//navbar-collapse-->
+
+            <div class="social-icons-men">
+
+				<div class="men">
+					<div id="dd" class="wrapper-dropdown-2" tabindex="1"><span><a href="#" class="men1"></a></span>
+							<ul class="dropdown">
+
+									<li><a href="{% url 'crm:view_profile' %}">View Profile </a></li>
+
+									<li><a href="{% url 'crm:logout' %}">Log Out</a></li>
+							</ul>
+					</div>
+					<script type="text/javascript">
+							function DropDown(el) {
+								this.dd = el;
+								this.initEvents();
+							}
+							DropDown.prototype = {
+								initEvents : function() {
+									var obj = this;
+
+									obj.dd.on('click', function(event){
+										$(this).toggleClass('active');
+										event.stopPropagation();
+									});
+								}
+							}
+							$(function() {
+
+								var dd = new DropDown( $('#dd') );
+
+								$(document).click(function() {
+									// all dropdowns
+									$('.wrapper-dropdown-2').removeClass('active');
+								});
+
+                            });
+			         </script>
+                            </div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+<!-- //navigation -->
+        <hr>
+        <!-- Subscription Detials -->
+    <div class="support">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7  register contact ">
+                        <h2 style="font-size:1.7em;">Subscripton Details</h2>
+                        <hr>
+                        <table class="table">
+                          <thead style="background:#fbfbfb;">
+                            <tr>
+                              <th>#</th>
+                              <th>Package</th>
+                              <th style="text-align:center;">Pricing</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                                <th><p>1.</p></th>
+                              <td style="text-align:left;"><p>Instagram Marketing</p></td>
+                              <td><p>10.00 $ till next month</p></td>
+                            </tr>
+
+                          </tbody>
+                        </table>
+                        <div class="subsbtn"><p>{{ form.render }}</p></div>
+
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+    <!-- Subscription Detials -->
+  </div>
+
+<script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>

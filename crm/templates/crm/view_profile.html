@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+<head>
+<title>Instagram Marketing | CRM Dashboard</title>
+
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- //for-mobile-apps -->
+
+
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'css/style2.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!-- js -->
+    <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
+    <!-- //js -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+    <link href="{% static 'css/fabochart.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/employee.css' %}" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/png" href="{% static 'images/icon.ico' %}" sizes="64x64" >
+
+
+</head>
+
+<body>
+	  <div class="smart-main">
+
+<!-- navigation -->
+    <div class="navigation">
+                <a href="{% url 'marketing:marketing_profile' %}">
+
+			<div class="logo logo2">
+
+			</div>
+                </a>
+				 <!--<h2 class="dheading"><a href="{% url 'marketing:marketing_profile' %}">YOUR DASHBOARD</a></h2>-->
+
+			<!--//navbar-collapse-->
+
+             <div class="social-icons-men">
+
+				<div class="men">
+					<div id="dd" class="wrapper-dropdown-2" tabindex="1"><span><a href="#" class="men1"><i class="fa fa-user" aria-hidden="true"></i></a></span>
+							<ul class="dropdown">
+
+
+									<li><a href="{% url  'crm:view_profile' %}">View Profile </a></li>
+                                    <li><a href="{% url  'marketing:view_subscription' %}">View Subscriptions </a></li>
+                                    <li><a href="{% url  'marketing:add_account' %}">Add Account </a></li>
+                                    <li><a href="{% url  'crm:logout' %}">Log Out</a></li>
+							</ul>
+					</div>
+					<script type="text/javascript">
+							function DropDown(el) {
+								this.dd = el;
+								this.initEvents();
+							}
+							DropDown.prototype = {
+								initEvents : function() {
+									var obj = this;
+
+									obj.dd.on('click', function(event){
+										$(this).toggleClass('active');
+										event.stopPropagation();
+									});
+								}
+							}
+							$(function() {
+
+								var dd = new DropDown( $('#dd') );
+
+								$(document).click(function() {
+									// all dropdowns
+									$('.wrapper-dropdown-2').removeClass('active');
+								});
+
+                            });
+			         </script>
+                            </div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+<!-- //navigation -->
+
+    <!-- View Profile -->
+    <div class="support">
+            <div class="container">
+                {% if messages %}
+            <div class="alert alert-success messages">
+            {% for message in messages %}
+
+                <span {% if message.tag %} class="{{ message.tags }}"{% endif %}>
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important:{% endif %}
+                {{ message }}<br/>
+                </span>
+
+            {% endfor %}
+            </div>
+        {% endif %}
+                <div class="row">
+                    <div class="col-lg-7  register contact " style="padding-top:2%;">
+                        <h2 style="font-size:1.7em;text-transform:none;" >Account Info</h2>
+                        <form action="{% url 'crm:view_profile' %}" method="post">{% csrf_token %}
+                            <label class="iglabel">Name:</label>
+
+                            <div class="col-md-12 col-sm-6 contact_right_grid">
+                                <input type="text" name="name" class="inclass" style="color:#212121;text-align:left;" value="{{ profile_obj.name }}" disabled>
+                            </div>
+                            <div class="clearfix"> </div>
+                            <label class="iglabel">Email:</label>
+                            <div class="col-md-12 col-sm-6 contact_right_grid">
+                                <input type="email" name="email" class="inclass" style="color:#212121;text-align:left;" value="{{ profile_obj.email }}" hidden>
+                                <input type="email" name="" class="inclass" style="color:#212121;text-align:left;" value="{{ profile_obj.email }}" disabled>
+                            </div>
+                            <div class="clearfix"> </div>
+
+                            <label class="iglabel">Change Password:</label>
+                            <div class="col-md-12 col-sm-6 contact_right_grid">
+                                <input type="password" name="password" class="inclass" id="inpass" style="color:#212121;text-align:left;" value="{{ profile_obj.password }}">
+                            </div>
+                            <div class="clearfix"> </div>
+
+
+                            <div class="col-md-12 col-sm-6 contact_right_grid">
+                                <span class="pull-left" style="margin-left:5.1%;font-family: 'Roboto';"><input type="checkbox" onclick="myFunction()"> Show Password</span>
+                            </div>
+                            <div class="clearfix"> </div>
+                            <br>
+
+                            <input class="inreg" type="submit" value="SUBMIT">
+                        </form>
+
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+<!-- View Profile -->
+
+    <script>
+        function myFunction() {
+          var x = document.getElementById("inpass");
+          if (x.type === "password") {
+            x.type = "text";
+          } else {
+            x.type = "password";
+          }
+        }
+
+    </script>
+
+    </div>
+
+<script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>

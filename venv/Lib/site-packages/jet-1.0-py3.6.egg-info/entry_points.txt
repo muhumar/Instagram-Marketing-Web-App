@@ -1,0 +1,3 @@
+[console_scripts]
+jet = jet_files.jet:run
+
