@@ -23,9 +23,7 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '#bpek6x7oi%#87l%q20@lxj*xe8@^387zfk^02cj3@423w2^k3'
 
-PAYPAL_RECEIVER_EMAIL = 'billut123-facilitator@gmail.com'
 
-PAYPAL_TEST = True
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
